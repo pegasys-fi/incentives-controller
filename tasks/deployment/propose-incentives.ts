@@ -4,7 +4,6 @@ import { IAaveGovernanceV2__factory } from '../../types';
 import { Signer } from 'ethers';
 import { getDefenderRelaySigner } from '../../helpers/defender-utils';
 import { DRE } from '../../helpers/misc-utils';
-import { logError } from '../../helpers/tenderly-utils';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bs58 = require('bs58');
@@ -66,7 +65,6 @@ task('propose-incentives', 'Create some proposals and votes')
         console.log('- Proposal submitted to Governance');
         await tx.wait();
       } catch (error) {
-        logError();
         throw error;
       }
 

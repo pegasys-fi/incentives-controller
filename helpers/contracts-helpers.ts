@@ -7,16 +7,11 @@ import {
   eContractid,
   eEthereumNetwork,
   iParamsPerNetwork,
-  ePolygonNetwork,
-  eXDaiNetwork,
   eNetwork,
   iEthereumParamsPerNetwork,
-  iPolygonParamsPerNetwork,
-  iXDaiParamsPerNetwork,
 } from './types';
 import { Artifact } from 'hardhat/types';
 import { verifyContract } from './etherscan-verification';
-import { usingTenderly } from './tenderly-utils';
 
 export const registerContractInJsonDb = async (contractId: string, contractInstance: Contract) => {
   const currentNetwork = DRE.network.name;
@@ -89,16 +84,6 @@ export const withSaveAndVerify = async <ContractType extends Contract>(
 ): Promise<ContractType> => {
   await waitForTx(instance.deployTransaction);
   await registerContractInJsonDb(id, instance);
-  if (usingTenderly()) {
-    console.log();
-    console.log('Doing Tenderly contract verification of', id);
-    await (DRE as any).tenderlyRPC.verify({
-      name: id,
-      address: instance.address,
-    });
-    console.log(`Verified ${id} at Tenderly!`);
-    console.log();
-  }
   if (verify) {
     await verifyContract(instance.address, args);
   }
@@ -136,40 +121,15 @@ export const linkBytecode = (artifact: Artifact, libraries: any) => {
 export const getParamPerNetwork = <T>(param: iParamsPerNetwork<T>, network: eNetwork) => {
   const {
     main,
-    ropsten,
-    kovan,
-    coverage,
-    buidlerevm,
-    tenderlyMain,
   } = param as iEthereumParamsPerNetwork<T>;
-  const { matic, mumbai } = param as iPolygonParamsPerNetwork<T>;
-  const { xdai } = param as iXDaiParamsPerNetwork<T>;
   const MAINNET_FORK = process.env.MAINNET_FORK === 'true';
   if (MAINNET_FORK) {
     return main;
   }
 
   switch (network) {
-    case eEthereumNetwork.coverage:
-      return coverage;
-    case eEthereumNetwork.buidlerevm:
-      return buidlerevm;
-    case eEthereumNetwork.hardhat:
-      return buidlerevm;
-    case eEthereumNetwork.kovan:
-      return kovan;
-    case eEthereumNetwork.ropsten:
-      return ropsten;
     case eEthereumNetwork.main:
       return main;
-    case eEthereumNetwork.tenderlyMain:
-      return tenderlyMain;
-    case ePolygonNetwork.matic:
-      return matic;
-    case ePolygonNetwork.mumbai:
-      return mumbai;
-    case eXDaiNetwork.xdai:
-      return xdai;
   }
 };
 

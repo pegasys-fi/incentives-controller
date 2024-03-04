@@ -291,16 +291,6 @@ describe('Enable incentives in target assets', () => {
         })
       ).wait();
     } catch (error) {
-      if (DRE.network.name.includes('tenderly')) {
-        const transactionLink = `https://dashboard.tenderly.co/${DRE.config.tenderly.username}/${
-          DRE.config.tenderly.project
-        }/fork/${DRE.tenderly.network().getFork()}/simulation/${DRE.tenderly.network().getHead()}`;
-        console.error(
-          '[TENDERLY] Transaction Reverted. Check TX simulation error at:',
-          transactionLink
-        );
-      }
-      throw error;
     }
   });
 

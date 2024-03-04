@@ -32,7 +32,6 @@ import { IERC20DetailedFactory } from '../types/IERC20DetailedFactory';
 import { fullCycleLendingPool, getReserveConfigs, spendList } from './helpers';
 import { deployAaveIncentivesController } from '../helpers/contracts-accessors';
 import { IGovernancePowerDelegationTokenFactory } from '../types/IGovernancePowerDelegationTokenFactory';
-import { logError } from '../helpers/tenderly-utils';
 
 const {
   RESERVES = 'DAI,GUSD,USDC,USDT,WBTC,WETH',
@@ -251,7 +250,6 @@ describe('Enable incentives in target assets', () => {
     try {
       await (await gov.execute(proposalId, { gasLimit: 3000000 })).wait();
     } catch (error) {
-      logError();
       throw error;
     }
 
