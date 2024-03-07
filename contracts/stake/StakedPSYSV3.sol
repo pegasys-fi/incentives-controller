@@ -1,1 +1,1 @@
-import '@aave/aave-stake/contracts/stake/StakedAaveV3.sol';
+import '@pollum-io/pegasys-stake/contracts/stake/StakedTokenV3.sol';

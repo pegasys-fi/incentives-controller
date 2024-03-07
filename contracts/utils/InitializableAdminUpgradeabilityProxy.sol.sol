@@ -1,1 +1,1 @@
-import '@aave/aave-stake/contracts/lib/InitializableAdminUpgradeabilityProxy.sol';
+import '@pollum-io/pegasys-stake/contracts/lib/InitializableAdminUpgradeabilityProxy.sol';

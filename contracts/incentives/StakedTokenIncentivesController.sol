@@ -2,8 +2,8 @@
 pragma solidity 0.7.5;
 pragma experimental ABIEncoderV2;
 
-import {SafeERC20} from '@aave/aave-stake/contracts/lib/SafeERC20.sol';
-import {IERC20} from '@aave/aave-stake/contracts/interfaces/IERC20.sol';
+import {SafeERC20} from '@pollum-io/pegasys-stake/contracts/lib/SafeERC20.sol';
+import {IERC20} from '@pollum-io/pegasys-stake/contracts/interfaces/IERC20.sol';
 import {BaseIncentivesController} from './base/BaseIncentivesController.sol';
 import {IStakedTokenWithConfig} from '../interfaces/IStakedTokenWithConfig.sol';
 

@@ -4,7 +4,7 @@ pragma experimental ABIEncoderV2;
 
 import {IPegasysIncentivesController} from '../interfaces/IPegasysIncentivesController.sol';
 import {DistributionTypes} from '../lib/DistributionTypes.sol';
-import {IAToken} from '@aave/aave-stake/contracts/interfaces/IAToken.sol';
+import {IAToken} from '@pollum-io/pegasys-stake/contracts/interfaces/IAToken.sol';
 
 contract ATokenMock is IAToken {
   IPegasysIncentivesController public _aic;
