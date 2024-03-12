@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@pollum-io/pegasys-stake": "^0.0.1",
-    "@aave/governance-v2": "^1.0.0",
+    "@pollum-io/pegasys-governance-v2": "^0.0.1",
     "hardhat-deploy": "^0.7.2"
   }
 }
