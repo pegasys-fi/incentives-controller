@@ -4,19 +4,19 @@ pragma experimental ABIEncoderV2;
 
 import {SafeMath} from '../../lib/SafeMath.sol';
 import {DistributionTypes} from '../../lib/DistributionTypes.sol';
-import {VersionedInitializable} from '@aave/aave-stake/contracts/utils/VersionedInitializable.sol';
+import {VersionedInitializable} from '@pollum-io/pegasys-stake/contracts/utils/VersionedInitializable.sol';
 import {DistributionManager} from './DistributionManager.sol';
-import {IERC20} from '@aave/aave-stake/contracts/interfaces/IERC20.sol';
+import {IERC20} from '@pollum-io/pegasys-stake/contracts/interfaces/IERC20.sol';
 import {IScaledBalanceToken} from '../../interfaces/IScaledBalanceToken.sol';
-import {IAaveIncentivesController} from '../../interfaces/IAaveIncentivesController.sol';
+import {IPegasysIncentivesController} from '../../interfaces/IPegasysIncentivesController.sol';
 
 /**
  * @title BaseIncentivesController
  * @notice Abstract contract template to build Distributors contracts for ERC20 rewards to protocol participants
- * @author Aave
+ * @author Pegasys
  **/
 abstract contract BaseIncentivesController is
-  IAaveIncentivesController,
+  IPegasysIncentivesController,
   VersionedInitializable,
   DistributionManager
 {
@@ -43,7 +43,7 @@ abstract contract BaseIncentivesController is
     REWARD_TOKEN = address(rewardToken);
   }
 
-  /// @inheritdoc IAaveIncentivesController
+  /// @inheritdoc IPegasysIncentivesController
   function configureAssets(address[] calldata assets, uint256[] calldata emissionsPerSecond)
     external
     override
@@ -63,7 +63,7 @@ abstract contract BaseIncentivesController is
     _configureAssets(assetsConfig);
   }
 
-  /// @inheritdoc IAaveIncentivesController
+  /// @inheritdoc IPegasysIncentivesController
   function handleAction(
     address user,
     uint256 totalSupply,
@@ -76,7 +76,7 @@ abstract contract BaseIncentivesController is
     }
   }
 
-  /// @inheritdoc IAaveIncentivesController
+  /// @inheritdoc IPegasysIncentivesController
   function getRewardsBalance(address[] calldata assets, address user)
     external
     view
@@ -96,7 +96,7 @@ abstract contract BaseIncentivesController is
     return unclaimedRewards;
   }
 
-  /// @inheritdoc IAaveIncentivesController
+  /// @inheritdoc IPegasysIncentivesController
   function claimRewards(
     address[] calldata assets,
     uint256 amount,
@@ -106,7 +106,7 @@ abstract contract BaseIncentivesController is
     return _claimRewards(assets, amount, msg.sender, msg.sender, to);
   }
 
-  /// @inheritdoc IAaveIncentivesController
+  /// @inheritdoc IPegasysIncentivesController
   function claimRewardsOnBehalf(
     address[] calldata assets,
     uint256 amount,
@@ -118,7 +118,7 @@ abstract contract BaseIncentivesController is
     return _claimRewards(assets, amount, msg.sender, user, to);
   }
 
-  /// @inheritdoc IAaveIncentivesController
+  /// @inheritdoc IPegasysIncentivesController
   function claimRewardsToSelf(address[] calldata assets, uint256 amount)
     external
     override
@@ -127,18 +127,18 @@ abstract contract BaseIncentivesController is
     return _claimRewards(assets, amount, msg.sender, msg.sender, msg.sender);
   }
 
-  /// @inheritdoc IAaveIncentivesController
+  /// @inheritdoc IPegasysIncentivesController
   function setClaimer(address user, address caller) external override onlyEmissionManager {
     _authorizedClaimers[user] = caller;
     emit ClaimerSet(user, caller);
   }
 
-  /// @inheritdoc IAaveIncentivesController
+  /// @inheritdoc IPegasysIncentivesController
   function getClaimer(address user) external view override returns (address) {
     return _authorizedClaimers[user];
   }
 
-  /// @inheritdoc IAaveIncentivesController
+  /// @inheritdoc IPegasysIncentivesController
   function getUserUnclaimedRewards(address _user) external view override returns (uint256) {
     return _usersUnclaimedRewards[_user];
   }

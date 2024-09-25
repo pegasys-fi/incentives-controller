@@ -1,1 +1,1 @@
-import '@aave/governance-v2/contracts/governance/Executor.sol';
+import '@pollum-io/pegasys-governance-v2/contracts/governance/Executor.sol';

@@ -1,7 +1,8 @@
 pragma solidity 0.7.5;
+pragma experimental ABIEncoderV2;
 
 import {IStakedTokenWithConfig} from '../interfaces/IStakedTokenWithConfig.sol';
-import {IERC20} from '@aave/aave-stake/contracts/interfaces/IERC20.sol';
+import {IERC20} from '@pollum-io/pegasys-stake/contracts/interfaces/IERC20.sol';
 
 contract StakeMock is IStakedTokenWithConfig {
   address public immutable override STAKED_TOKEN;

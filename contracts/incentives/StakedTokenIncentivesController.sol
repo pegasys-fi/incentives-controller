@@ -2,17 +2,17 @@
 pragma solidity 0.7.5;
 pragma experimental ABIEncoderV2;
 
-import {SafeERC20} from '@aave/aave-stake/contracts/lib/SafeERC20.sol';
-import {IERC20} from '@aave/aave-stake/contracts/interfaces/IERC20.sol';
+import {SafeERC20} from '@pollum-io/pegasys-stake/contracts/lib/SafeERC20.sol';
+import {IERC20} from '@pollum-io/pegasys-stake/contracts/interfaces/IERC20.sol';
 import {BaseIncentivesController} from './base/BaseIncentivesController.sol';
 import {IStakedTokenWithConfig} from '../interfaces/IStakedTokenWithConfig.sol';
 
 /**
  * @title StakedTokenIncentivesController
- * @notice Distributor contract for rewards to the Aave protocol, using a staked token as rewards asset.
- * The contract stakes the rewards before redistributing them to the Aave protocol participants.
+ * @notice Distributor contract for rewards to thePegasys protocol, using a staked token as rewards asset.
+ * The contract stakes the rewards before redistributing them to thePegasys protocol participants.
  * The reference staked token implementation is at https://github.com/aave/aave-stake-v2
- * @author Aave
+ * @author Pegasys
  **/
 contract StakedTokenIncentivesController is BaseIncentivesController {
   using SafeERC20 for IERC20;
